@@ -11,9 +11,9 @@ void createDirectory(FILE *file){
 
     while(fgets(buffer,100,(FILE *) file) != NULL){    
         char *DNI = strtok(buffer, separator);
-        char directoryName [18]= "./estudiantes/";
+        char directoryName [30]= "./utils/estudiantes/";
         strcat(directoryName, DNI);
-        mkdir("./estudiantes", 0777);
+        mkdir("./utils/estudiantes", 0777);
         mkdir(directoryName, 0777);
     }
 } 
@@ -23,7 +23,7 @@ int main (){
     char DNI [8];
     signal(SIGINT, &manejador);
 
-    if(file=fopen("estudiantes_p1.text","r")){
+    if(file=fopen("utils/estudiantes_p1.text","r")){
         createDirectory(file);
         fclose(file);
         exit(0);

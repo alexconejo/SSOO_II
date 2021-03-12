@@ -24,8 +24,7 @@ int daemoncode(void){
             exit(EXIT_FAILURE);
         }
         while (1) {
-            mkdir("./backup", 0777);
-            system("cp -r estudiantes backup");
+            system("cp -r ./utils/estudiantes ./utils/backup");
             sleep(20); /* se activa cada 60 segundos*/
         }
         return 0;
