@@ -37,7 +37,7 @@ int main (int argc, char *argv[]){
     }
     else if (pidA==0){
         printf("El proceso hijo A con pid: %d ha iniciado\n", getpid());
-        execve("./PA", parmList, envParms);
+        execve("./exec/PA", parmList, envParms);
     }
     else{
         printf("El proceso manager con pid: %d ha iniciado\n", getpid());
@@ -53,7 +53,7 @@ int main (int argc, char *argv[]){
         }
         else if(pidB==0){
             printf("El proceso hijo B con pid: %d ha iniciado\n", getpid());
-            execve("./PB", parmList, envParms);
+            execve("./exec/PB", parmList, envParms);
         }
         else{
             if((pidC=fork())==-1){
@@ -62,7 +62,7 @@ int main (int argc, char *argv[]){
             }
             else if(pidC==0){
                 printf("El proceso hijo C con pid: %d ha iniciado\n", getpid());
-                if(execl("./PC", wr_tuberia, NULL)==-1){
+                if(execl("./exec/PC", wr_tuberia, NULL)==-1){
                     perror("El proceso C ha generado un error de execl\n");
                     exit(1);
                 }
@@ -86,7 +86,7 @@ int main (int argc, char *argv[]){
             }
             else if(pidDaemon==0){
                 printf("El proceso Daemon con pid: %d ha iniciado\n", getpid());
-                if(execve("./daemon", parmList, envParms)==-1){
+                if(execve("./exec/daemon", parmList, envParms)==-1){
                     perror("El proceso Daemon ha generado un error de execl\n");
                     exit(1);
                 }
@@ -109,7 +109,7 @@ void manejador(int sig){
     }
     else if (pidD==0){
         printf("El proceso hijo D con pid: %d ha iniciado\n", getpid());
-        if(execve("./PD", parmList, envParms)==-1){
+        if(execve("./exec/PD", parmList, envParms)==-1){
             perror("El proceso D ha generado un error de execl\n");
         }
     }
@@ -122,7 +122,7 @@ void writelog(char logText[300]){
     FILE *fileLog;
     
     
-    if(fileLog = fopen("./log.txt", "w")){
+    if(fileLog = fopen("./utils/log.txt", "w")){
         fputs(logText, fileLog);
         fclose(fileLog);
     }  

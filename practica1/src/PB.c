@@ -9,9 +9,9 @@ void manejador(int sig);
 void introducePDF(char * examType, char *DNI){
     char command [100];
 
-    strcpy(command, "cp ./MODELO");
+    strcpy(command, "cp ./utils/MODELO");
     strcat(command, examType);
-    strcat(command, ".pdf ./estudiantes/");
+    strcat(command, ".pdf ./utils/estudiantes/");
     strcat(command, DNI);
     system(command);
     //Comprobar que el archivo existe o hacer enlace duro con ln
@@ -33,7 +33,7 @@ int main (){
     char DNI [8];
     signal(SIGINT, &manejador);
 
-    if(file=fopen("estudiantes_p1.text","r")){
+    if(file=fopen("utils/estudiantes_p1.text","r")){
         createDirectory(file);
         fclose(file);
         exit(0);

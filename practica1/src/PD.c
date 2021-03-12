@@ -7,7 +7,7 @@
 void manejador(int sig);
 void removeDirectory(void){
 
-    system("rm -rf ./estudiantes");
+    system("rm -rf ./utils/estudiantes");
 } 
 
 int main (){

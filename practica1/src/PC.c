@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
+#include <unistd.h>
 
 void manejador(int sig);
 
 int createExtension(char * grade, char *DNI){
     FILE* fileGrade;
-    char txtPath [100]="./estudiantes/";
+    char txtPath [100]="./utils/estudiantes/";
     int minimumGrade, minimumGradeRest;
     char minimumGradeArray[2];
     
@@ -53,7 +54,7 @@ int main (int argc, char *argv[]){
     signal(SIGINT, &manejador);
 
     
-    if(file=fopen("estudiantes_p1.text","r")){
+    if(file=fopen("utils/estudiantes_p1.text","r")){
         average= createDirectory(file);
         printf("%i", average);
         fclose(file);
