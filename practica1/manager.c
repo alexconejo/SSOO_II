@@ -5,6 +5,10 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <syslog.h>
+#include <fcntl.h>
+#include <errno.h>
 
 #define LECTURA 0
 #define ESCRITURA 1
@@ -12,20 +16,19 @@
 void manejador(int sig);
 void writelog(char logText[300]);
 
+
 int main (int argc, char *argv[]){
 
     int tuberia[2];
     int estado1, estado2, estado3;
-    pid_t pidA, pidB, pidC;
+    pid_t pidA, pidB, pidC, pidDaemon, sid;
     char *const parmList[] = {NULL};
     char *const envParms[] = {NULL};
     char wr_tuberia[100], buffer_pipe[4];
     char logText[300];
-
     strcat(logText, "******** Log del sistema ********\n");
     writelog(logText);
-    
-    signal(SIGINT, manejador);
+    signal(SIGINT, &manejador);
     pipe(tuberia);
     sprintf(wr_tuberia, "%d", tuberia[ESCRITURA]);
 
@@ -39,6 +42,7 @@ int main (int argc, char *argv[]){
     else{
         printf("El proceso manager con pid: %d ha iniciado\n", getpid());
         wait(&estado1);
+        
         strcat(logText, "Creación de directorios finalizada.\n");
         writelog(logText);
 
@@ -76,14 +80,40 @@ int main (int argc, char *argv[]){
             writelog(logText);
             writelog(logText);
             writelog(logText);
-            
+            if((pidDaemon=fork())==-1){
+                perror("El proceso C ha generado un error de fork \n");
+                exit(1);
+            }
+            else if(pidDaemon==0){
+                printf("El proceso Daemon con pid: %d ha iniciado\n", getpid());
+                if(execve("./daemon", parmList, envParms)==-1){
+                    perror("El proceso Daemon ha generado un error de execl\n");
+                    exit(1);
+                }
+            }
+
         }
     }
     return EXIT_SUCCESS;
 }
 
 void manejador(int sig){
+    pid_t pidD;
+    char *const parmList[] = {NULL};
+    char *const envParms[] = {NULL};
+
     printf("Process kill: %d\n",getpid());
+
+    if((pidD=fork())==-1){
+        perror("El proceso A ha generado un error de fork \n");
+    }
+    else if (pidD==0){
+        printf("El proceso hijo D con pid: %d ha iniciado\n", getpid());
+        if(execve("./PD", parmList, envParms)==-1){
+            perror("El proceso D ha generado un error de execl\n");
+        }
+    }
+    
     exit(0);
 }
 
@@ -97,3 +127,4 @@ void writelog(char logText[300]){
         fclose(fileLog);
     }  
 }
+

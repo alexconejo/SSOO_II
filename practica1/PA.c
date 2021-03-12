@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <signal.h>
 
-
+void manejador(int sig);
 void createDirectory(FILE *file){
     char buffer[100];
     char separator[] = " ";
@@ -19,7 +21,8 @@ void createDirectory(FILE *file){
 int main (){
     FILE *file;
     char DNI [8];
-    
+    signal(SIGINT, &manejador);
+
     if(file=fopen("estudiantes_p1.text","r")){
         createDirectory(file);
         fclose(file);
@@ -32,3 +35,8 @@ int main (){
     return -1;
 }
 
+
+void manejador(int sig){
+    printf("Process kill: %d\n",getpid());
+    exit(0);
+}
