@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 
+void manejador(int sig);
 
 int createExtension(char * grade, char *DNI){
     FILE* fileGrade;
@@ -48,6 +50,7 @@ int main (int argc, char *argv[]){
     int minimumGrade=0;
     int average;
     char msg[8];
+    signal(SIGINT, &manejador);
 
     
     if(file=fopen("estudiantes_p1.text","r")){
@@ -62,4 +65,9 @@ int main (int argc, char *argv[]){
     printf("Archivo no existente \n"); 
     exit(-1);   
     return -1;
+}
+
+void manejador(int sig){
+    printf("Process kill: %d\n",getpid());
+    exit(0);
 }
