@@ -10,7 +10,6 @@ void Handler(int sig);
 void CommandCpModelFile(char * p_exam_type, char *p_dni){
     char command_cp [100] = "";
     char model_name [20]  = "./utils/MODELO";
-    FILE * p_students_file, p_model_file;
     
     strcat(model_name, p_exam_type);
     strcat(model_name, ".pdf");

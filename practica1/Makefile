@@ -1,21 +1,39 @@
+DIROBJ := obj/
+DIREXE := exec/
+DIRSRC := src/
 
-# Macros
+CFLAGS := -c 
+LDLIBS := -lpthread -lrt
+CC := gcc
 
-CC = gcc
-DIRS = ./src/
-DIRE = ./exec/
+all : dirs manager PA PB PC PD daemon
 
-# Reglas explícitas
+dirs:
+	mkdir -p $(DIROBJ) $(DIREXE)
 
-all: $(DIRS)manager.c $(DIRS)PA.c $(DIRS)PB.c $(DIRS)PC.c $(DIRS)PD.c $(DIRS)daemon.c 
-		$(CC) $(DIRS)manager.c -o $(DIRE)manager.o
-		$(CC) $(DIRS)PA.c -o $(DIRE)PA.o
-		$(CC) $(DIRS)PB.c -o $(DIRE)PB.o
-		$(CC) $(DIRS)PC.c -o $(DIRE)PC.o
-		$(CC) $(DIRS)PD.c -o $(DIRE)PD.o
-		$(CC) $(DIRS)daemon.c -o $(DIRE)daemon.o
+manager: $(DIROBJ)manager.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 
-manager: 
+PA: $(DIROBJ)PA.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 
-clean:
-	rm -rf $(DIRE)*.o
+PB: $(DIROBJ)PB.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+PC: $(DIROBJ)PC.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+PD: $(DIROBJ)PD.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+daemon: $(DIROBJ)daemon.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+$(DIROBJ)%.o: $(DIRSRC)%.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+solution:
+	./$(DIREXE)manager 
+
+clean : 
+	rm -rf *~ $(DIROBJ) $(DIREXE) $(DIRHEA)*~ $(DIRSRC)*~

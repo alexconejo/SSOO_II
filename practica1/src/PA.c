@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/stat.h>
 
 void Handler(int sig);
 void CreateDirectories(FILE *file);
@@ -31,15 +32,17 @@ void CreateDirectories(FILE *file){
     char *p_dni             = "";
     char directory_name[50] = "";
 
+    strcpy(directory_name, "./utils/estudiantes");
+    mkdir(directory_name, 0777);
+
     while(fgets(buffer,100,(FILE *) file) != NULL){    
         strcpy(directory_name, "");
         //Leemos el dni del fichero estudiantes_p1.text
         p_dni = strtok(buffer, separator);
         strcat(directory_name, "./utils/estudiantes/");
         strcat(directory_name, p_dni);
-        //Creamos el directorio estudiantes y un directorio por estudiante
-        //donde su nombre sera el dni del estudiante.
-        mkdir("./utils/estudiantes", 0777);
+        //Creamos un directorio por estudiante donde su nombre sera
+        //el dni del estudiante.
         mkdir(directory_name, 0777);
     }
 } 
