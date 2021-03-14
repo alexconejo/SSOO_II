@@ -2,32 +2,39 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <signal.h>
 #include <sys/stat.h>
 #include <syslog.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <dirent.h>
 
-int daemoncode(void);
+int DaemonCode(void);
 int main (){
-    daemoncode();
+    DaemonCode();
     exit(0);
     return 0;
 }
 
-int daemoncode(void){
-        umask(0);
-        
-        pid_t sid = setsid();
-        if (sid < 0) {
-            perror("new SID failed\n");
-            exit(EXIT_FAILURE);
-        }
-        while (1) {
-            system("cp -r ./utils/estudiantes ./utils/backup");
-            sleep(20); /* se activa cada 60 segundos*/
-        }
-        return 0;
+int DaemonCode(void){
+    //Creamos el nuevo SID para el proceso hijo
+    pid_t sid = setsid();
+
+    //Cambiamos el modo de la máscara de creacion de archivo
+    umask(0);
     
+    if (sid < 0) {
+        perror("new SID failed\n");
+        exit(EXIT_FAILURE);
+    }
+    while (1) {
+        //Comprobamos la existencia del directorio estudiantes y copiamos su carpeta en el backup
+        if(opendir("./utils/estudiantes")){
+            system("cp -r ./utils/estudiantes ./utils/backup");
+        }
+
+        sleep(60); /* se activa cada 60 segundos*/
+    }
+    
+    return 0;
         
 }

@@ -4,27 +4,17 @@
 #include <unistd.h>
 #include <signal.h>
 
-void manejador(int sig);
-void createDirectory(FILE *file){
-    char buffer[100];
-    char separator[] = " ";
-
-    while(fgets(buffer,100,(FILE *) file) != NULL){    
-        char *DNI = strtok(buffer, separator);
-        char directoryName [30]= "./utils/estudiantes/";
-        strcat(directoryName, DNI);
-        mkdir("./utils/estudiantes", 0777);
-        mkdir(directoryName, 0777);
-    }
-} 
+void Handler(int sig);
+void CreateDirectories(FILE *file);
 
 int main (){
     FILE *file;
-    char DNI [8];
-    signal(SIGINT, &manejador);
+    
+    //Activamos el manejador
+    signal(SIGINT, &Handler);
 
     if(file=fopen("utils/estudiantes_p1.text","r")){
-        createDirectory(file);
+        CreateDirectories(file);
         fclose(file);
         exit(0);
         return 0;
@@ -35,8 +25,26 @@ int main (){
     return -1;
 }
 
+void CreateDirectories(FILE *file){
+    char buffer[100]        = "";
+    char separator[]        = " ";
+    char *p_dni             = "";
+    char directory_name[50] = "";
 
-void manejador(int sig){
+    while(fgets(buffer,100,(FILE *) file) != NULL){    
+        strcpy(directory_name, "");
+        //Leemos el dni del fichero estudiantes_p1.text
+        p_dni = strtok(buffer, separator);
+        strcat(directory_name, "./utils/estudiantes/");
+        strcat(directory_name, p_dni);
+        //Creamos el directorio estudiantes y un directorio por estudiante
+        //donde su nombre sera el dni del estudiante.
+        mkdir("./utils/estudiantes", 0777);
+        mkdir(directory_name, 0777);
+    }
+} 
+
+void Handler(int sig){
     printf("Process kill: %d\n",getpid());
     exit(0);
 }
