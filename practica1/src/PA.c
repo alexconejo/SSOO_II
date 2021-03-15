@@ -1,3 +1,14 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : PA.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Creacion del directorio /estudiantes y 
+ *                   directorios de los alumnos
+ * *********************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

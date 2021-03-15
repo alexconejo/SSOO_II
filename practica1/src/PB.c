@@ -1,3 +1,15 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : PB.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Copia del modelo del examen en los 
+ *                   directorios de los alumnos
+ * *********************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

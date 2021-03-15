@@ -1,3 +1,15 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : PD.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Limpieza de archivos en caso de que 
+ *                   el manejador salte
+ * *********************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

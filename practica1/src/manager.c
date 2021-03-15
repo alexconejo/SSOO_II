@@ -1,3 +1,15 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : manager.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Gestion de procesos para la realizacion
+ *                   paralela de tareas.
+ * *********************************************************/
+
+
 #include <signal.h>
 #include <unistd.h>
 #include <stdio.h>
