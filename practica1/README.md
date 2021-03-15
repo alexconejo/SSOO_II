@@ -59,6 +59,6 @@ $ make clean
 Si hemos ejecutado el programa tendremos un proceso daemon que debemos eliminar ya que se queda en segundo plano
 haciendo la copia de seguridad. Para ello debermos buscar el numero del proceso y matarlo:
 ```
-$ ps -e
+$ ps -e | grep daemon
 $ kill -9 <Numero del proceso>
 ```
