@@ -1,3 +1,16 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : PC.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Creacion del archivo nota.txt en el 
+ *                   directorio de cada alumno y calculo de
+ *                   la media
+ * *********************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

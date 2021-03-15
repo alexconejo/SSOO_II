@@ -1,3 +1,15 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : daemon.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Proceso demonio que va haciendo una 
+ *                   copia de seguridad cada minuto
+ * *********************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

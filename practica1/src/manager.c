@@ -1,3 +1,15 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : manager.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Gestion de procesos para la realizacion
+ *                   paralela de tareas.
+ * *********************************************************/
+
+
 #include <signal.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -46,7 +58,7 @@ int main (int argc, char *argv[]){
     }
     else if (pid_a==0){
         printf("El proceso hijo A con pid: %d ha iniciado\n", getpid());
-        execve("./exec/PA.o", PARMLIST, ENVPARMS);
+        execve("./exec/PA", PARMLIST, ENVPARMS);
     }
     else{
         printf("El proceso manager con pid: %d ha iniciado\n", getpid());
@@ -63,7 +75,7 @@ int main (int argc, char *argv[]){
         }
         else if(pid_b==0){
             printf("El proceso hijo B con pid: %d ha iniciado\n", getpid());
-            execve("./exec/PB.o", PARMLIST, ENVPARMS);
+            execve("./exec/PB", PARMLIST, ENVPARMS);
         }
         else{
             //Creamos el proceso hijo que ejecutara el codigo de PC
@@ -73,7 +85,7 @@ int main (int argc, char *argv[]){
             }
             else if(pid_c==0){
                 printf("El proceso hijo C con pid: %d ha iniciado\n", getpid());
-                if(execl("./exec/PC.o", wr_tuberia, NULL)==-1){
+                if(execl("./exec/PC", wr_tuberia, NULL)==-1){
                     perror("El proceso C ha generado un error de execl\n");
                     exit(1);
                 }
@@ -102,7 +114,7 @@ int main (int argc, char *argv[]){
             }
             else if(pid_daemon==0){
                 printf("El proceso Daemon con pid: %d ha iniciado\n", getpid());
-                if(execve("./exec/daemon.o", PARMLIST, ENVPARMS)==-1){
+                if(execve("./exec/daemon", PARMLIST, ENVPARMS)==-1){
                     perror("El proceso Daemon ha generado un error de execl\n");
                     exit(1);
                 }
@@ -128,7 +140,7 @@ void Handler(int sig){
     }
     else if (pid_d==0){
         printf("El proceso hijo D con pid: %d ha iniciado\n", getpid());
-        if(execve("./exec/PD.o", PARMLIST, ENVPARMS)==-1){
+        if(execve("./exec/PD", PARMLIST, ENVPARMS)==-1){
             perror("El proceso D ha generado un error de execl\n");
         }
     }

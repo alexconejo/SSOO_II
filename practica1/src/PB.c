@@ -1,3 +1,15 @@
+/***********************************************************
+ * Project         : Practica 1 de Sistemas Opertivos II
+ * 
+ * Program Name    : PB.c
+ * 
+ * Author          : Álex Conejo
+ * 
+ * Purpose         : Copia del modelo del examen en los 
+ *                   directorios de los alumnos
+ * *********************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +22,6 @@ void Handler(int sig);
 void CommandCpModelFile(char * p_exam_type, char *p_dni){
     char command_cp [100] = "";
     char model_name [20]  = "./utils/MODELO";
-    FILE * p_students_file, p_model_file;
     
     strcat(model_name, p_exam_type);
     strcat(model_name, ".pdf");
