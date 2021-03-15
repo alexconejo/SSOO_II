@@ -41,7 +41,7 @@ int DaemonCode(void){
     while (1) {
         //Comprobamos la existencia del directorio estudiantes y copiamos su carpeta en el backup
         if(opendir("./utils/estudiantes")){
-            system("cp -r ./utils/estudiantes ./utils/backup");
+            system("cp -r ./utils/estudiantes/ ./utils/backup");
         }
 
         sleep(60); /* se activa cada 60 segundos*/
