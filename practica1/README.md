@@ -2,6 +2,7 @@
 Repositorio donde se usan los conocimientos aprendidos en el Tema 2
 
 ## Descripción
+***
 El objetivo principal de este proyecto es el uso de manejo de llamadas al sistema, tratamiento de señales y gestión de interrupciones.
 
 Se usan algunas funciones para la gestión de procesos:
@@ -14,6 +15,7 @@ Se usan algunas funciones para la gestión de procesos:
  
 
 ## Explicación de los procesos
+***
 La práctica consta de 6 procesos donde el proceso padre será el manager y los hijos ejecutarán el resto de procesos.
 
 Los procesos son:
